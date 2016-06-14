@@ -1,0 +1,19 @@
+body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.logo {
+	margin-bottom: 20px;
+}
+
+.container {
+	position: relative;
+}
+
+.logout {
+	right: 15px;
+	top: 0;
+	position: absolute;
+	display: block;
+}
