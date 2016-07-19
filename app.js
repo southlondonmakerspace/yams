@@ -35,14 +35,14 @@ var server = net.createServer( telnetServer.createServer ).listen( 1234, telnetS
 telnetServer.event.client.data = function( buffer ) {
 	var client = this.client;
 	var tag = buffer.toString().trim();
-
+	//console.log( buffer.toString() );
 	// Device
 	if ( client.device == undefined ) {
 		if ( Object.keys( accessList ).indexOf( tag ) != -1 ) {
-			console.log( 'valid device' );
+			//console.log( 'valid device' );
 			client.device = tag;
 		} else {
-			console.log( 'invalid device' );
+			//console.log( 'invalid device' );
 			invalid( client );
 		}
 		return;
@@ -52,21 +52,23 @@ telnetServer.event.client.data = function( buffer ) {
 	membership.validate( tag, function( response ) {
 		if ( accessList[ client.device ].indexOf( tag ) != -1 ) {
 			if ( response.valid && response.active ) {
-				console.log( 'valid tag' );
+				//console.log( 'valid tag' );
 				valid( client );
 			} else {
-				console.log( 'invalid member' );
+				//console.log( 'invalid member' );
 				invalid( client );
 			}
 		} else {
 			// Store for later
-			accessList[ 'new' ].push( tag );
-			savePermissions();
+			if ( accessList[ 'new' ].indexOf( tag ) == -1 ) {
+				accessList[ 'new' ].push( tag );
+				savePermissions();
+			}
 
-			console.log( 'invalid tag' );
+			//console.log( 'invalid tag' );
 			invalid( client );
 		}
-		console.log( response );
+		//console.log( response );
 	} );
 }
 
