@@ -8,6 +8,8 @@ var express = require( 'express' )
 	app = express(),
 	http = require( 'http' ).Server( app );
 
+var config = require( __dirname + '/config.json' );
+
 var telnetServer = require( './telnet-server.js' );
 var membership = require( './membership.js' );
 var accessList = JSON.parse( fs.readFileSync( __dirname + '/access-list.json' ).toString() );
@@ -31,7 +33,7 @@ app.set( 'view engine', 'swig' );
 app.set( 'view cache', false );
 swig.setDefaults( { cache: false } );
 
-var server = net.createServer( telnetServer.createServer ).listen( 1234, telnetServer.event.started );
+var server = net.createServer( telnetServer.createServer ).listen( config['telnet-port'], telnetServer.event.started );
 telnetServer.event.client.data = function( buffer ) {
 	var client = this.client;
 	var tag = buffer.toString().trim();
@@ -147,6 +149,6 @@ function savePermissions() {
 }
 
 // Start server
-var listener = app.listen( 3000, 'localhost', function () {
+var listener = app.listen( config['web-port'], 'localhost', function () {
 	console.log( "Web server started on port: " + listener.address().port );
 } );

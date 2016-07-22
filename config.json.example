@@ -1,0 +1,5 @@
+{
+	"telnet-port": 5678,
+	"web-port": 8080,
+	"secret": ""
+}

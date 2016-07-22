@@ -1,5 +1,6 @@
 var request = require( 'request' ),
-	crypto = require( 'crypto' );
+	crypto = require( 'crypto' ),
+	config = require( __dirname + '/config.json' );
 
 var Membership = {
 	validate: function ( id , callback ) {
@@ -21,7 +22,7 @@ var Membership = {
 	},
 	hashCard: function ( id ) {
 		var md5 = crypto.createHash( 'md5' );
-		md5.update( '' );
+		md5.update( config['secret'] );
 		md5.update( id.toLowerCase() );
 		return md5.digest( 'hex' );
 	}
