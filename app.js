@@ -149,6 +149,6 @@ function savePermissions() {
 }
 
 // Start server
-var listener = app.listen( config['web-port'], 'localhost', function () {
+var listener = app.listen( config['web-port'], function () {
 	console.log( "Web server started on port: " + listener.address().port );
 } );
