@@ -28,7 +28,7 @@ app.use( session( {
 } ) );
 
 // Setup static route
-app.use( express.static( 'static' ) );
+app.use( express.static( __dirname + '/static' ) );
 
 // Setup swig
 app.engine( 'swig', swig.renderFile );
