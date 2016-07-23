@@ -9,10 +9,10 @@ var express = require( 'express' )
 
 var config = require( __dirname + '/config.json' );
 
-var telnetServer = require( './telnet-server.js' );
-var membership = require( './membership.js' );
-var permissions = require( './permissions.js' )( __dirname + '/access-list.json' ).load();
-var webServer = require( './webserver.js' )( permissions );
+var telnetServer = require( __dirname + '/telnet-server.js' );
+var membership = require( __dirname + '/membership.js' );
+var permissions = require( __dirname + '/permissions.js' )( __dirname + '/access-list.json' ).load();
+var webServer = require( __dirname + '/webserver.js' )( permissions );
 
 // Web Server
 /////////////
